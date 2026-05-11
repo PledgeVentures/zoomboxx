@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Boxx | O Maior Show de Música Eletrônica Ao Vivo do Brasil</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN para rodar nativo e rápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zbpink: '#ff00c8',
+                        zbblue: '#00e5ff',
+                        zbdark: '#050508',
+                        zbpanel: '#111118'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-zb': 'linear-gradient(to right, #ff00c8, #00e5ff)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos customizados para o brilho Neon */
+        body {
+            background-color: #050508;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .neon-text-pink {
+            text-shadow: 0 0 10px rgba(255, 0, 200, 0.7), 0 0 20px rgba(255, 0, 200, 0.5);
+        }
+        
+        .neon-text-blue {
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.7), 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.5);
+        }
+
+        .btn-neon {
+            background: linear-gradient(45deg, #ff00c8, #00e5ff);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            box-shadow: 0 0 20px #ff00c8, 0 0 30px #00e5ff;
+            transform: translateY(-2px);
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Hero Background - Substitua a URL pela imagem real do show no WordPress */
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(5,5,8,0.3), #050508), url('https://images.unsplash.com/photo-1470229722913-7c090be5c560?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Estilização dos inputs do formulário */
+        input, select {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00e5ff;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Corrigindo a cor das opções no select para ficarem visíveis */
+        option {
+            background-color: #111118;
+            color: white;
+        }
+
+        /* Instagram Carousel */
+        .ig-track {
+            display: flex;
+            width: calc(256px * 18); /* 9 imagens duplicadas (18 total para loop contínuo) */
+            animation: scroll-ig 40s linear infinite;
+        }
+        .ig-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-ig {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-256px * 9)); } /* Rola a largura exata de 9 imagens */
+        }
+        .ig-item {
+            width: 256px;
+            height: 256px;
+            padding: 6px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .ig-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+        .ig-item:hover img {
+            opacity: 1;
+            transform: scale(0.96);
+            box-shadow: 0 0 15px rgba(255, 0, 200, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-zbpink selection:text-white">
+
+    <!-- HEADER / NAVEGAÇÃO -->
+    <nav class="fixed w-full z-50 bg-zbdark/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <!-- LOGO - Substitua a tag abaixo pela imagem da sua Logo no WP -->
+                    <div class="text-3xl font-black tracking-tighter">
+                        <span class="text-zbpink neon-text-pink">ZOOM</span><br class="hidden sm:block"><span class="text-zbblue neon-text-blue -mt-2 block sm:inline">BOXX</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#sobre" class="text-gray-300 hover:text-white transition">A Experiência</a>
+                    <a href="#eventos" class="text-gray-300 hover:text-white transition">Eventos</a>
+                    <a href="#clientes" class="text-gray-300 hover:text-white transition">Clientes</a>
+                    <a href="#cotacao" class="btn-neon text-white px-6 py-2 rounded-full font-bold text-sm tracking-wide">SOLICITAR SHOW</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg relative pt-32 pb-20 lg:pt-48 lg:pb-32 flex items-center min-h-[90vh]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-zbblue font-bold tracking-widest uppercase text-2xl md:text-4xl lg:text-5xl mb-4 neon-text-blue">O Maior Show de</h2>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
+                Música Eletrônica <br>
+                <span class="text-transparent bg-clip-text bg-gradient-zb">Ao Vivo</span> do Brasil
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
+                Um show aclamado e incomparável que torna inesquecíveis todos os eventos por onde passa.
+            </p>
+            <a href="#cotacao" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white btn-neon w-full sm:w-auto">
+                VERIFICAR DISPONIBILIDADE
+                <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- BANNER DE SHOW - PARALLAX -->
+    <!-- DIMENSÕES IDEAIS: 1920x800 pixels. -->
+    <!-- Para trocar a imagem, substitua o link dentro do atributo url('') no style abaixo -->
+    <section class="w-full relative border-t border-white/10 bg-fixed bg-center bg-cover h-[400px] md:h-[500px] lg:h-[600px]" 
+             style="background-image: url('https://images.unsplash.com/photo-1540039155732-d6f24b5d5b8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800&q=80');">
+        <!-- Gradiente para suavizar a transição com a parte de baixo e destacar os cartões -->
+        <div class="absolute inset-0 bg-gradient-to-t from-zbdark via-zbdark/40 to-transparent"></div>
+    </section>
+
+    <!-- SOBRE A BANDA -->
+    <section id="sobre" class="pb-20 bg-zbdark relative">
+        <!-- O container abaixo usa margem negativa (-mt-40 em mobile e lg:-mt-60 em desktop) para flutuar por cima do banner -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-40 lg:-mt-60">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Missão -->
+                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-crosshairs text-4xl text-zbpink mb-6 drop-shadow-md"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">A Missão</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Entreter. Conectar. Proporcionar ao público uma experiência única em suas vidas.
+                    </p>
+                </div>
+                <!-- História -->
+                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-globe text-4xl text-zbblue mb-6 drop-shadow-md"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">A História</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Fundado nos EUA, o grupo interpreta com uma identidade atual, ao vivo, os sons mais marcantes de ontem e de hoje. Os artistas <strong>Felipe de Oliveira e grande equipe</strong> transformam esta visão em uma completa experiência de som e imagem, compartilhando essa energia por todo o Brasil e o mundo.
+                    </p>
+                </div>
+                <!-- Resultado -->
+                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fa-solid fa-bolt text-4xl text-zbpink mb-6 drop-shadow-md"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-white">O Resultado</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Um show aclamado, incomparável que torna inesquecíveis todos os eventos por onde passa. Isto é o <strong>ZOOM BOXX</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÁREAS DE ATUAÇÃO (EVENTOS) -->
+    <section id="eventos" class="py-20 bg-[#08080c]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black uppercase">Onde <span class="text-zbpink">Tocamos</span></h2>
+                <div class="h-1 w-24 bg-gradient-zb mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 text-center">
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbblue transition cursor-default">Festivais</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbpink transition cursor-default">Eventos Culturais</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbblue transition cursor-default">Formaturas</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbpink transition cursor-default">Festas de Empresas</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbblue transition cursor-default">Casamentos</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbpink transition cursor-default">15 Anos</span>
+                <span class="px-6 py-3 bg-zbpanel border border-white/10 rounded-full text-lg font-semibold hover:border-zbblue transition cursor-default">Bat/Bar Mitzvahs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE COTAÇÃO (FORMULÁRIO) -->
+    <section id="cotacao" class="py-20 bg-zbdark relative overflow-hidden">
+        <!-- Elementos decorativos de fundo -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-zbpink rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-zbblue rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-zbpanel/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl relative">
+                
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-black uppercase mb-2">Leve o <span class="text-transparent bg-clip-text bg-gradient-zb">Zoom Boxx</span> para seu evento</h2>
+                    <p class="text-gray-400">Preencha os dados abaixo e nossa equipe comercial entrará em contato com um orçamento personalizado.</p>
+                </div>
+
+                <form id="cotacaoForm" class="space-y-6">
+                    <!-- Nome / Empresa -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Nome / Empresa *</label>
+                        <input type="text" id="nome" required class="w-full px-4 py-3 rounded-lg" placeholder="Como devemos te chamar?">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Data do Evento *</label>
+                            <!-- Date picker padrão do HTML5 -->
+                            <input type="date" required id="dataEvento" class="w-full px-4 py-3 rounded-lg text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Evento *</label>
+                            <select id="tipoEvento" required class="w-full px-4 py-3 rounded-lg appearance-none cursor-pointer">
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="15 Anos">15 Anos</option>
+                                <option value="Aniversário">Aniversário</option>
+                                <option value="Baile">Baile</option>
+                                <option value="Bat/Bar Mitzvah">Bat/Bar Mitzvah</option>
+                                <option value="Carnaval">Carnaval</option>
+                                <option value="Casa de shows">Casa de shows</option>
+                                <option value="Casamento">Casamento</option>
+                                <option value="Club">Club</option>
+                                <option value="Corporativo / Empresa">Corporativo / Empresa</option>
+                                <option value="Evento Particular">Evento Particular</option>
+                                <option value="Evento Público">Evento Público</option>
+                                <option value="Festa de Prefeitura">Festa de Prefeitura</option>
+                                <option value="Festival">Festival</option>
+                                <option value="Lounge">Lounge</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">País</label>
+                            <select id="pais" required class="w-full px-4 py-3 rounded-lg appearance-none cursor-pointer">
+                                <option value="Bolívia">Bolívia</option>
+                                <option value="Brasil" selected>Brasil</option>
+                                <option value="China">China</option>
+                                <option value="Estados Unidos">Estados Unidos</option>
+                                <option value="Europa">Europa</option>
+                                <option value="Paraguai">Paraguai</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Estado / Província *</label>
+                            <input type="text" id="estado" required class="w-full px-4 py-3 rounded-lg" placeholder="Ex: SP">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Cidade *</label>
+                            <input type="text" id="cidade" required class="w-full px-4 py-3 rounded-lg" placeholder="Nome da cidade">
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full btn-neon text-white font-bold text-xl py-4 rounded-xl flex justify-center items-center">
+                            <i class="fa-brands fa-whatsapp text-2xl mr-3"></i>
+                            SOLICITAR COTAÇÃO AGORA
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Mensagem de Redirecionamento (Substitui a de sucesso original) -->
+                <div id="successMessage" class="hidden text-center py-10">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-500 mb-6">
+                        <i class="fa-brands fa-whatsapp text-4xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-2">Redirecionando...</h3>
+                    <p class="text-gray-400 text-lg">Se o seu WhatsApp não abrir automaticamente, <a id="linkManual" href="#" target="_blank" class="text-zbpink underline">clique aqui</a>.</p>
+                    <button onclick="resetForm()" class="mt-8 px-6 py-2 border border-white/20 rounded-full text-white hover:bg-white/10 transition">Fazer nova cotação</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTES / MARCAS -->
+    <section id="clientes" class="py-16 bg-[#08080c] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-bold tracking-widest text-gray-500 uppercase mb-8">Grandes marcas que confiam em nosso show</p>
+            <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Como não temos as logos reais, usamos texto estilizado para representar as marcas -->
+                <span class="text-3xl font-bold text-blue-700 tracking-tighter">tigo</span>
+                <span class="text-2xl font-serif font-bold italic text-red-600">Taquiña</span>
+                <span class="text-2xl font-serif font-bold italic">Davene</span>
+                <span class="text-xl font-black tracking-tighter text-green-500">HERBALIFE</span>
+                <span class="text-2xl font-bold">Deloitte.</span>
+                <span class="text-2xl font-bold text-blue-400">Cielo</span>
+                <span class="text-2xl font-bold text-blue-600">DANONE</span>
+                <span class="text-2xl font-black italic">bodytech</span>
+                <span class="text-2xl font-bold text-red-500">Santander</span>
+                <span class="text-xl font-bold tracking-widest">JEUNESSE</span>
+                <span class="text-2xl font-bold text-yellow-500">anglo</span>
+                <span class="text-3xl font-black text-blue-800">TIM</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARROSSEL INSTAGRAM -->
+    <section id="instagram" class="py-16 bg-zbdark overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <h2 class="text-3xl font-black uppercase flex items-center justify-center md:justify-start">
+                    <i class="fa-brands fa-instagram text-zbpink mr-3 text-4xl"></i> @zoomboxx
+                </h2>
+                <p class="text-gray-400 mt-2">Acompanhe nossa energia em tempo real</p>
+            </div>
+            <a href="https://instagram.com/zoomboxx" target="_blank" class="mt-4 md:mt-0 text-sm font-bold text-zbblue hover:text-white transition">SEGUIR NO INSTAGRAM <i class="fa-solid fa-arrow-right ml-1"></i></a>
+        </div>
+        
+        <!-- Pista de rolagem infinita -->
+        <div class="relative w-full">
+            <!-- Gradientes escuros nas bordas para suavizar a entrada/saída das imagens -->
+            <div class="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-zbdark to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-zbdark to-transparent z-10 pointer-events-none"></div>
+            
+            <div class="ig-track" id="igCarousel">
+                <!-- O JavaScript injetará as imagens aqui para manter o código HTML limpo -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA - OUTRAS SOLICITAÇÕES -->
+    <section id="parcerias" class="py-24 bg-zbpanel border-t border-white/10 relative overflow-hidden text-center">
+        <!-- Efeito visual de brilho verde no fundo -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-3xl mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-6">Busca outra <span class="text-green-400">frequência?</span></h2>
+            <p class="text-gray-300 text-lg mb-10">
+                Se você não encontrou a opção certa para o seu evento, ou se busca parcerias comerciais, contatos de imprensa e outras solicitações específicas, fale diretamente com o nosso atendimento.
+            </p>
+            
+            <a href="https://wa.me/5519981819846?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20parcerias%20comerciais%20e%20outras%20solicita%C3%A7%C3%B5es%20com%20o%20Zoom%20Boxx." 
+               target="_blank" 
+               class="inline-flex items-center justify-center px-8 py-5 text-xl font-bold rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white transition-all shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_35px_rgba(37,211,102,0.6)] hover:-translate-y-1">
+                <i class="fa-brands fa-whatsapp text-3xl mr-3"></i>
+                FALAR COM ATENDIMENTO
+            </a>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX DO INSTAGRAM (Modal Invisível por padrão que abre ao clicar na miniatura) -->
+    <div id="igLightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center p-4 backdrop-blur-md cursor-pointer transition-opacity duration-300">
+        <span class="absolute top-6 right-6 text-white/50 hover:text-white text-5xl transition">&times;</span>
+        <!-- A imagem ampliada não navega para o instagram -->
+        <img id="igLightboxImg" src="" alt="Zoom Boxx Ampliada" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl cursor-default" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Marca -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="text-3xl font-black tracking-tighter mb-6">
+                        <span class="text-zbpink">ZOOM</span><br><span class="text-zbblue -mt-2 block">BOXX</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">O maior show de música eletrônica ao vivo do Brasil.</p>
+                </div>
+
+                <!-- Links e Materiais -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Acesso Rápido</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-zbblue transition flex items-center"><i class="fa-solid fa-briefcase w-6"></i> Portfólio</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-zbblue transition flex items-center"><i class="fa-solid fa-camera w-6"></i> Fotos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-zbblue transition flex items-center"><i class="fa-solid fa-video w-6"></i> Vídeos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-zbpink transition flex items-center"><i class="fa-solid fa-clipboard-list w-6"></i> Rider & Room List</a></li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Conecte-se</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-zbpink hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white transition"><i class="fa-brands fa-youtube text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-green-500 hover:text-white transition"><i class="fa-brands fa-spotify text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contato -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Comercial</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fa-brands fa-whatsapp mt-1 mr-3 text-green-500 text-lg"></i>
+                            <a href="https://wa.me/5519981819846" target="_blank" class="hover:text-white transition">
+                                Conversar por WhatsApp<br>
+                                <span class="font-bold text-white">(19) 98181-9846</span>
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-map-location-dot mt-1 mr-3 text-zbblue text-lg"></i>
+                            <span>R. Dr. Clóvis Peixoto 124<br>Campinas, SP<br>CEP: 13.092-062</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-xs text-center md:text-left mb-4 md:mb-0">
+                    &copy; 2026 Zoom Boxx LTDA. Todos os direitos reservados.
+                </p>
+                <div class="text-gray-600 text-xs">
+                    Desenvolvido para alta performance.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica Simples do Formulário -->
+    <script>
+        document.getElementById('cotacaoForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita recarregar a página
+            
+            // Coletar os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const dataOriginal = document.getElementById('dataEvento').value;
+            const tipoEvento = document.getElementById('tipoEvento').value;
+            const pais = document.getElementById('pais').value;
+            const estado = document.getElementById('estado').value;
+            const cidade = document.getElementById('cidade').value;
+
+            // Formatar a data (de YYYY-MM-DD para DD/MM/YYYY)
+            let dataFormatada = dataOriginal;
+            if (dataOriginal) {
+                const [ano, mes, dia] = dataOriginal.split('-');
+                dataFormatada = `${dia}/${mes}/${ano}`;
+            }
+
+            // Construir a mensagem
+            const mensagem = `Olá, equipe Zoom Boxx! Gostaria de solicitar uma cotação para o meu evento.\n\n` +
+                             `*Nome / Empresa:* ${nome}\n` +
+                             `*Data do Evento:* ${dataFormatada}\n` +
+                             `*Tipo de Evento:* ${tipoEvento}\n` +
+                             `*Local:* ${cidade} - ${estado} (${pais})`;
+
+            // Criar a URL do WhatsApp
+            const numeroWhatsApp = '5519981819846';
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+            
+            // Mostrar interface de redirecionamento (caso o navegador bloqueie o popup, o usuário pode clicar no link manual)
+            document.getElementById('cotacaoForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.getElementById('linkManual').href = urlWhatsApp;
+            
+            // Rola a tela suavemente e tenta abrir a aba do WhatsApp
+            document.getElementById('cotacao').scrollIntoView({ behavior: 'smooth' });
+            window.open(urlWhatsApp, '_blank');
+        });
+
+        function resetForm() {
+            document.getElementById('cotacaoForm').reset();
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('cotacaoForm').classList.remove('hidden');
+        }
+
+        // --- LÓGICA DO CARROSSEL INSTAGRAM E LIGHTBOX ---
+        
+        // As 9 últimas publicações (Substitua as URLs pelas fotos reais ou integre via Plugin WP)
+        const igImages = [
+            'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1521337581100-8ca9a73a5f79?auto=format&fit=crop&w=500&q=80',
+            'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=500&q=80'
+        ];
+
+        const carousel = document.getElementById('igCarousel');
+        const lightbox = document.getElementById('igLightbox');
+        const lightboxImg = document.getElementById('igLightboxImg');
+
+        // Função para abrir a foto (Lightbox)
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Evita que a página role de fundo
+        }
+
+        // Função para fechar a foto
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightboxImg.src = '';
+            document.body.style.overflow = 'auto'; // Devolve a rolagem
+        }
+
+        // Clicar fora da foto também fecha
+        lightbox.addEventListener('click', closeLightbox);
+
+        // Renderizar o carrossel (Duplicamos a array para que a rolagem seja infinita e contínua)
+        const allItems = [...igImages, ...igImages];
+        
+        allItems.forEach(src => {
+            const div = document.createElement('div');
+            div.className = 'ig-item';
+            div.innerHTML = `<img src="${src}" alt="Instagram Zoom Boxx">`;
+            div.onclick = () => openLightbox(src); // Clica abre a modal, não o IG
+            carousel.appendChild(div);
+        });
+    </script>
+</body>
+</html>
