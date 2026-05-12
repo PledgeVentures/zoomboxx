@@ -149,6 +149,14 @@
                         <span class="text-zbpink neon-text-pink">ZOOM</span><br class="hidden sm:block"><span class="text-zbblue neon-text-blue -mt-2 block sm:inline">BOXX</span>
                     </div>
                 </div>
+
+                <!-- Botão Menu Mobile (Hamburger) -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-white hover:text-zbpink transition focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#sobre" class="text-gray-300 hover:text-white transition">A Experiência</a>
                     <a href="#eventos" class="text-gray-300 hover:text-white transition">Eventos</a>
@@ -157,11 +165,21 @@
                 </div>
             </div>
         </div>
+
+        <!-- Menu Mobile Dropdown (Oculto por padrão) -->
+        <div id="mobileMenu" class="md:hidden hidden bg-zbdark/95 backdrop-blur-md border-b border-white/10 absolute w-full left-0 shadow-2xl">
+            <div class="px-4 pt-2 pb-8 space-y-4 flex flex-col text-center">
+                <a href="#sobre" class="text-gray-300 hover:text-white text-lg font-bold block px-3 py-3 rounded-md border-b border-white/5">A Experiência</a>
+                <a href="#eventos" class="text-gray-300 hover:text-white text-lg font-bold block px-3 py-3 rounded-md border-b border-white/5">Eventos</a>
+                <a href="#clientes" class="text-gray-300 hover:text-white text-lg font-bold block px-3 py-3 rounded-md border-b border-white/5">Clientes</a>
+                <a href="#cotacao" class="btn-neon text-white px-6 py-4 rounded-full font-bold text-lg mt-6 mx-4 block">SOLICITAR SHOW</a>
+            </div>
+        </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero-bg relative pt-32 pb-20 lg:pt-48 lg:pb-32 flex items-center min-h-[90vh]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center w-full">
             <h2 class="text-zbblue font-bold tracking-widest uppercase text-2xl md:text-4xl lg:text-5xl mb-4 neon-text-blue">O Maior Show de</h2>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-6">
                 Música Eletrônica <br>
@@ -170,20 +188,31 @@
             <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
                 Um show aclamado e incomparável que torna inesquecíveis todos os eventos por onde passa.
             </p>
-            <a href="#cotacao" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white btn-neon w-full sm:w-auto">
+            <a href="#cotacao" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white btn-neon w-full sm:w-auto relative z-20">
                 VERIFICAR DISPONIBILIDADE
                 <i class="fa-solid fa-arrow-right ml-2"></i>
             </a>
         </div>
     </section>
 
-    <!-- BANNER DE SHOW - PARALLAX -->
+    <!-- BANNER DE SHOW - PARALLAX COM TESTIMONIAIS -->
     <!-- DIMENSÕES IDEAIS: 1920x800 pixels. -->
     <!-- Para trocar a imagem, substitua o link dentro do atributo url('') no style abaixo -->
-    <section class="w-full relative border-t border-white/10 bg-fixed bg-center bg-cover h-[400px] md:h-[500px] lg:h-[600px]" 
+    <section class="w-full relative border-t border-white/10 bg-center bg-cover md:bg-fixed h-[400px] md:h-[500px] lg:h-[600px] flex justify-center pt-10 md:pt-16 lg:pt-24" 
              style="background-image: url('parallax-banner.jpg');">
         <!-- Gradiente para suavizar a transição com a parte de baixo e destacar os cartões -->
-        <div class="absolute inset-0 bg-gradient-to-t from-zbdark via-zbdark/40 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-zbdark via-zbdark/40 to-transparent pointer-events-none"></div>
+
+        <!-- BLURBS / TESTIMONIAIS FLUTUANTES -->
+        <div class="relative z-10 w-full max-w-4xl px-4 h-36 md:h-28 flex justify-center items-center pointer-events-none">
+            <!-- Container com fundo de vidro bem sutil e sem sombra neon -->
+            <div id="testimonialContainer" class="absolute w-full px-6 py-5 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/5 transition-all duration-1000 opacity-0 translate-y-4 text-center">
+                <!-- Texto com opacidade 70% -->
+                <p id="testimonialText" class="text-sm md:text-base text-gray-300/70 italic mb-2 leading-relaxed">"O conteúdo entra aqui"</p>
+                <!-- Autor com opacidade 50%, fonte leve e cor cinza escura -->
+                <p id="testimonialAuthor" class="text-xs md:text-sm text-gray-500/50 font-light uppercase tracking-widest">— Autor</p>
+            </div>
+        </div>
     </section>
 
     <!-- SOBRE A BANDA -->
@@ -192,28 +221,40 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-40 lg:-mt-60">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Missão -->
-                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
-                    <i class="fa-solid fa-crosshairs text-4xl text-zbpink mb-6 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold mb-4 text-white">A Missão</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Entreter. Conectar. Proporcionar ao público uma experiência única em suas vidas.
-                    </p>
+                <div class="relative overflow-hidden p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('missao-bg.jpg');"></div>
+                    <div class="absolute inset-0 bg-zbpanel/85 backdrop-blur-[2px]"></div>
+                    <div class="relative z-10">
+                        <i class="fa-solid fa-crosshairs text-4xl text-zbpink mb-6 drop-shadow-md"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">A Missão</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Entreter. Conectar. Proporcionar ao público uma experiência única em suas vidas.
+                        </p>
+                    </div>
                 </div>
                 <!-- História -->
-                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
-                    <i class="fa-solid fa-globe text-4xl text-zbblue mb-6 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold mb-4 text-white">A História</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        Fundado nos EUA, o grupo interpreta com uma identidade atual, ao vivo, os sons mais marcantes de ontem e de hoje. Os artistas <strong>Felipe de Oliveira e grande equipe</strong> transformam esta visão em uma completa experiência de som e imagem, compartilhando essa energia por todo o Brasil e o mundo.
-                    </p>
+                <div class="relative overflow-hidden p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('historia-bg.jpg');"></div>
+                    <div class="absolute inset-0 bg-zbpanel/85 backdrop-blur-[2px]"></div>
+                    <div class="relative z-10">
+                        <i class="fa-solid fa-globe text-4xl text-zbblue mb-6 drop-shadow-md"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">A História</h3>
+                        <p class="text-gray-300 leading-relaxed text-sm">
+                            Fundado nos EUA, o grupo interpreta com uma identidade atual, ao vivo, os sons mais marcantes de ontem e de hoje. Os artistas <strong>Felipe de Oliveira e grande equipe</strong> transformam esta visão em uma completa experiência de som e imagem, compartilhando essa energia por todo o Brasil e o mundo.
+                        </p>
+                    </div>
                 </div>
                 <!-- Resultado -->
-                <div class="bg-zbpanel/90 backdrop-blur-sm p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300">
-                    <i class="fa-solid fa-bolt text-4xl text-zbpink mb-6 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold mb-4 text-white">O Resultado</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Um show aclamado, incomparável que torna inesquecíveis todos os eventos por onde passa. Isto é o <strong>ZOOM BOXX</strong>.
-                    </p>
+                <div class="relative overflow-hidden p-8 rounded-2xl neon-border shadow-2xl shadow-black/50 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('resultado-bg.jpg');"></div>
+                    <div class="absolute inset-0 bg-zbpanel/85 backdrop-blur-[2px]"></div>
+                    <div class="relative z-10">
+                        <i class="fa-solid fa-bolt text-4xl text-zbpink mb-6 drop-shadow-md"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">O Resultado</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Um show aclamado, incomparável que torna inesquecíveis todos os eventos por onde passa. Isto é o <strong>ZOOM BOXX</strong>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -517,6 +558,61 @@
             document.getElementById('cotacaoForm').reset();
             document.getElementById('successMessage').classList.add('hidden');
             document.getElementById('cotacaoForm').classList.remove('hidden');
+        }
+
+        // --- LÓGICA DO MENU MOBILE ---
+        const btnMenu = document.getElementById('mobileMenuBtn');
+        const menuDrop = document.getElementById('mobileMenu');
+        const linksMenu = menuDrop.querySelectorAll('a');
+
+        // Abre/Fecha o menu ao clicar no hambúrguer
+        btnMenu.addEventListener('click', () => {
+            menuDrop.classList.toggle('hidden');
+        });
+
+        // Fecha o menu automaticamente quando o usuário clica em um link
+        linksMenu.forEach(link => {
+            link.addEventListener('click', () => {
+                menuDrop.classList.add('hidden');
+            });
+        });
+
+        // --- LÓGICA DOS DEPOIMENTOS FLUTUANTES ---
+        const testimonials = [
+            { text: "“O Zoom Boxx é sempre minha primeira sugestão para eventos que precisam de muita animação, uma apresentação moderna e profissionalismo — tudo isso com um custo de produção acessível. Já esteve presente em diversas produções para clientes como TIM e Herbalife, atendendo públicos de 400 a 12 mil pessoas.”", author: "Rogério Caporossi, Renase Eventos" },
+            { text: "“Trabalho com o Zoom Boxx há alguns anos e eles sempre me surpreendem pela inovação, animação e pela forma como comandam a festa. Ninguém fica parado! Na parte técnica, o profissionalismo é ímpar: são sempre acessíveis e flexíveis às minhas necessidades. Parceria fechada!”", author: "Mariane, Costa Brava Live Marketing" },
+            { text: "“Ter o Zoom Boxx em nossos eventos é proporcionar aos convidados uma experiência musical de arrepiar. Eles têm uma vibe e uma energia capazes de estremecer o salão. Quando o Zoom Boxx toca, é pista cheia do começo ao fim — garantia de um evento de sucesso.”", author: "Perfil Formaturas, SP" },
+            { text: "“Foi lindo, um espetáculo. Só elogios — todo mundo falando que foi a melhor apresentação do Carnaval. O Zoom Boxx entregou mais do que esperávamos. Arrebentaram. Esperamos de verdade que voltem no ano que vem.”", author: "Secretaria de Cultura de Paraisópolis/MG" }
+        ];
+
+        let currentTestimonial = 0;
+        const testContainer = document.getElementById('testimonialContainer');
+        const testText = document.getElementById('testimonialText');
+        const testAuthor = document.getElementById('testimonialAuthor');
+
+        function updateTestimonial() {
+            // Esmaecer (Fade out)
+            testContainer.classList.remove('opacity-100', 'translate-y-0');
+            testContainer.classList.add('opacity-0', 'translate-y-4');
+            
+            setTimeout(() => {
+                // Trocar o texto enquanto invisível
+                testText.innerText = testimonials[currentTestimonial].text;
+                testAuthor.innerText = testimonials[currentTestimonial].author;
+                
+                // Mostrar novamente (Fade in)
+                testContainer.classList.remove('opacity-0', 'translate-y-4');
+                testContainer.classList.add('opacity-100', 'translate-y-0');
+                
+                // Avançar para o próximo índice
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            }, 1000); // Tempo igual ao duration-1000 do CSS
+        }
+
+        // Iniciar o ciclo dos depoimentos
+        if(testContainer) {
+            setTimeout(updateTestimonial, 500); // Exibe o primeiro logo ao carregar a página
+            setInterval(updateTestimonial, 9000); // Rotaciona a cada 9 segundos
         }
 
         // --- LÓGICA DO CARROSSEL INSTAGRAM E LIGHTBOX ---
